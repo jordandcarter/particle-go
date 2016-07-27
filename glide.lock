@@ -1,0 +1,6 @@
+hash: 56d7338e72092212f5d1c2867f1a384a595854a18be8a15adc8377586492a0c8
+updated: 2016-07-27T21:05:25.48292706+03:00
+imports:
+- name: github.com/donovanhide/eventsource
+  version: fd1de70867126402be23c306e1ce32828455d85b
+testImports: []

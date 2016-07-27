@@ -1,0 +1,3 @@
+package: github.com/matisszilard/particle-go
+import:
+- package: github.com/donovanhide/eventsource
