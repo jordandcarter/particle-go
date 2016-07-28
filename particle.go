@@ -32,7 +32,7 @@ type response struct {
 	Functions     []string `json:"functions"`
 }
 
-func toPhoton(resp response) *Photon {
+func (resp *response) toPhoton() *Photon {
 	var photon Photon
 	photon.ID = resp.ID
 	photon.Name = resp.Name
@@ -58,8 +58,10 @@ const (
 	accessToken = "?access_token="
 )
 
-var errParticleCloud = errors.New("Error while requesting the photons from the Particle Cloud")
-var errBadInputNil = errors.New("The given input is nil")
+var (
+	errParticleCloud = errors.New("Error while requesting the photons from the Particle Cloud")
+	errBadInputNil   = errors.New("The given input is nil")
+)
 
 // Load initialize the particle token
 func Load(particleToken string) *Particle {
@@ -79,7 +81,7 @@ func (p *Particle) GetPhotons() ([]*Photon, error) {
 	photons = make([]*Photon, len(r))
 	for i := 0; i < len(r); i++ {
 		log.Debug("Particle: GetPhotons: Device name: ", r[i].Name, " device id: %q", r[i].ID)
-		photons[i] = toPhoton(r[i])
+		photons[i] = r[i].toPhoton()
 	}
 	return photons, nil
 }
@@ -92,7 +94,7 @@ func (p *Particle) GetPhoton(id string) (*Photon, error) {
 		log.Error("Particle: GetPhoton: read body failed: ", err)
 		return nil, err
 	}
-	return toPhoton(resp), nil
+	return resp.toPhoton(), nil
 }
 
 // GetEvent get a given event from the particle cloud
@@ -123,7 +125,7 @@ func (p *Particle) GetVariable(ph *Photon, variable string) (*Variable, error) {
 		log.Error("Particle: getInformationFromParticle: error while requesting the information from the Particle Cloud: ", err)
 		return nil, err
 	}
-	return toVariable(&v), nil
+	return v.toVariable(), nil
 }
 
 // CallFunction call a given Particle function on the Photon
@@ -147,7 +149,7 @@ func (p *Particle) CallFunction(ph *Photon, function string, command string) (*F
 		log.Error("Particle: CallFunction: json marshalling failed: ", err)
 		return nil, err
 	}
-	return toFunction(r), nil
+	return r.toFunction(), nil
 }
 
 func getInformationFromParticle(url string, data interface{}) error {

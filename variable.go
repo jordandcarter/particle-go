@@ -7,13 +7,6 @@ type Variable struct {
 	Value    float64
 }
 
-// Function contains information about a Particle function
-type Function struct {
-	Name        string
-	ReturnValue int
-	PhotonID    string
-}
-
 type particleVariable struct {
 	CMD    string  `json:"cmd"`
 	Name   string  `json:"name"`
@@ -22,15 +15,7 @@ type particleVariable struct {
 	//Photon *response `json:"coreInfo"`
 }
 
-type particleFunctionResponse struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	LastApp     string `json:"last_app"`
-	Connected   bool   `json:"connected"`
-	ReturnValue int    `json:"return_value"`
-}
-
-func toVariable(p *particleVariable) *Variable {
+func (p *particleVariable) toVariable() *Variable {
 	// TODO mszg Handle the Photon information
 	//if p.Name == "" || p.Photon == nil {
 	//	return nil
@@ -40,12 +25,4 @@ func toVariable(p *particleVariable) *Variable {
 	//v.PhotonID = p.Photon.ID
 	v.Value = p.Result
 	return &v
-}
-
-func toFunction(r particleFunctionResponse) *Function {
-	var f Function
-	f.Name = r.Name
-	f.PhotonID = r.ID
-	f.ReturnValue = r.ReturnValue
-	return &f
 }
