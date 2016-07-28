@@ -1,4 +1,4 @@
-package model
+package particle
 
 import (
 	"encoding/json"

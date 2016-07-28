@@ -1,4 +1,4 @@
-package model
+package particle
 
 // Photon model for storing a Photon
 type Photon struct {
