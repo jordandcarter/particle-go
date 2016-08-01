@@ -10,12 +10,6 @@ deps:
 clean:
 	rm -rf vendor
 
-install:
-	go install $$(glide novendor)
-
-fmt:
-	go fmt $$(glide novendor)
-
 lint:
 	gometalinter --vendor --deadline=300s ./...
 
