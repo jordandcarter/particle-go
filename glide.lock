@@ -1,0 +1,12 @@
+hash: a7930b0a667373b349fa3af487f1f75c5d6439a2abb45c18ddf49414a871d25b
+updated: 2016-07-28T20:43:24.089383225+03:00
+imports:
+- name: github.com/donovanhide/eventsource
+  version: fd1de70867126402be23c306e1ce32828455d85b
+- name: github.com/Sirupsen/logrus
+  version: a283a10442df8dc09befd873fab202bf8a253d6a
+- name: golang.org/x/sys
+  version: a646d33e2ee3172a661fc09bca23bb4889a41bc8
+  subpackages:
+  - unix
+testImports: []
